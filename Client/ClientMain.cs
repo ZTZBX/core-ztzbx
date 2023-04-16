@@ -7,17 +7,27 @@ namespace core_ztzbx.Client
 {
     public class ClientMain : BaseScript
     {
+        ChatMessage chatmes = new ChatMessage();
+
         public ClientMain()
         {
-            Debug.WriteLine("Hi from core_ztzbx.Client!");
+            EventHandlers["changeToken"] += new Action<string>(ChangeToken);
+            EventHandlers["getToken"] += new Func<string>(GetToken);
+
+            // Exports
+            Exports.Add("playerToken", new Func<string>(GetToken));
+
+            FreezeEntityPosition(PlayerPedId(), true);
         }
 
-        [Tick]
-        public Task OnTick()
+        private string GetToken() {return Player.playerToken;}
+
+        private void ChangeToken(string token) 
         {
-            DrawRect(0.5f, 0.5f, 0.5f, 0.5f, 255, 255, 255, 150);
-
-            return Task.FromResult(0);
+            Player.playerToken = token;
+            FreezeEntityPosition(PlayerPedId(), false);
         }
+
+        public string GetToken() {return Player.playerToken;}
     }
 }

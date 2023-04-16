@@ -9,10 +9,17 @@ namespace core_ztzbx.Server
         public CheckUser(){}
         public bool CheckCredentials(string username, string password)
         {
-          dynamic result = Exports["fivem-mysql"].raw($"SELECT * FROM players where username='{username}' and password='{password}'");  
-
-          if (result.Length > 0){return true;}
+          dynamic result = Exports["fivem-mysql"].raw($"SELECT * FROM players where username='{username}' and password='{password}'"); 
+        
+          if (result.Count > 0){return true;}
           return false;
+        }
+
+        public bool Exists(string username)
+        {
+          dynamic result = Exports["fivem-mysql"].raw($"SELECT * FROM players where username='{username}'"); 
+           if (result.Count > 0){return true;}
+           return false;
         }
     }
 }

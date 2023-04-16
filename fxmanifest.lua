@@ -14,7 +14,4 @@ dependencies {
     "fivem-mysql"
 }
 
-server_exports {"player"}
-client_exports {"player"}
-
 
