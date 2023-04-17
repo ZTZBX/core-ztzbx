@@ -69,17 +69,18 @@ namespace core_ztzbx.Server
         {
             if (!PlayersMetadata.token.ContainsKey(source))
             {
-                if (args.Count == 2)
+                if (args.Count == 3)
                 {
                     string username = args[0].ToString();
                     string password = args[1].ToString();
+                    string email = args[2].ToString();
 
                     if (password.Length > 5)
                     {
                         if (!auth.Exists(username))
                         {
                             string userKey = UserTokenGenerator.Get();
-                            auth.Register(userKey, username, password, "user");
+                            auth.Register(userKey, username, password, "user", email);
                             PlayersMetadata.token.Add(source, userKey);
                             TriggerClientEvent(Players[source], "changeToken", userKey);
                             return "OK";
@@ -96,7 +97,7 @@ namespace core_ztzbx.Server
                 }
                 else
                 {
-                    return "You need to pass username and password";
+                    return "You need to pass username, password and email";
                 }
 
             }

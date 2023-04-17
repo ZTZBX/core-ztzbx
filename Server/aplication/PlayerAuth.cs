@@ -15,9 +15,9 @@ namespace core_ztzbx.Server
             return status;
         }
 
-        public void Register(string token, string username, string password, string group)
+        public void Register(string token, string username, string password, string group, string email)
         {
-            insertUser.New(token, username, password, group);
+            insertUser.New(token, username, password, group, email);
         }
 
         public bool Exists(string username)
