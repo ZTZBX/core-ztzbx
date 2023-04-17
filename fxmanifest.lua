@@ -1,7 +1,7 @@
 fx_version 'bodacious'
 game 'gta5'
 
-file 'Client/bin/Release/**/publish/*.dll'
+file '*.dll'
 
 client_script 'Client/*.net.dll'
 server_script 'Server/*.net.dll'
