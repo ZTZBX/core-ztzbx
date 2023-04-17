@@ -40,7 +40,7 @@ namespace core_ztzbx.Server
                     string username = args[0].ToString();
                     string password = args[1].ToString();
 
-                    if (!auth.Login(username, password)) { return Exports["lenguaje"].user_wrong(); }
+                    if (!auth.Login(username, password)) { return Exports["language"].user_wrong(); }
 
                     string userKey = UserTokenGenerator.Get();
                     player.UpdateToken(userKey, username);
@@ -51,12 +51,12 @@ namespace core_ztzbx.Server
                 }
                 else
                 {
-                    return Exports["lenguaje"].user_parameters_login_error();
+                    return Exports["language"].user_parameters_login_error();
                 }
             }
             else
             {
-                return Exports["lenguaje"].already_logged();
+                return Exports["language"].already_logged();
             }
         }
 
@@ -70,10 +70,10 @@ namespace core_ztzbx.Server
                     string password = args[1].ToString();
                     string email = args[2].ToString();
 
-                    if (!EmailValidator.IsValidEmail(email)) { return Exports["lenguaje"].not_valid_email(); }
-                    if (auth.UsernameExists(username)) { return Exports["lenguaje"].user_exists(); }
-                    if (auth.EmailExists(email)) { return Exports["lenguaje"].email_exists(); }
-                    if (password.Length < 5) { return Exports["lenguaje"].password_to_short(); }
+                    if (!EmailValidator.IsValidEmail(email)) { return Exports["language"].not_valid_email(); }
+                    if (auth.UsernameExists(username)) { return Exports["language"].user_exists(); }
+                    if (auth.EmailExists(email)) { return Exports["language"].email_exists(); }
+                    if (password.Length < 5) { return Exports["language"].password_to_short(); }
                     
                     string userKey = UserTokenGenerator.Get();
                     auth.Register(userKey, username, password, "user", email);
@@ -84,13 +84,13 @@ namespace core_ztzbx.Server
                 }
                 else
                 {
-                    return Exports["lenguaje"].user_parameters_register_error();
+                    return Exports["language"].user_parameters_register_error();
                 }
 
             }
             else
             {
-                return Exports["lenguaje"].already_logged_registered();
+                return Exports["language"].already_logged_registered();
             }
         }
 
