@@ -1,4 +1,4 @@
-# core_ztzbx for CitizenFX
+# core_ztzbx for ZTZBX Framework
 
 ### **Requirements**
 - [fivem-mysql](https://github.com/ZTZBX/fivem-mysql)
