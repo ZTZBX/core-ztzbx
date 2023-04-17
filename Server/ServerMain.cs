@@ -40,23 +40,18 @@ namespace core_ztzbx.Server
                     string username = args[0].ToString();
                     string password = args[1].ToString();
 
-                    if (auth.Login(username, password))
-                    {
-                        string userKey = UserTokenGenerator.Get();
-                        player.UpdateToken(userKey, username);
-                        PlayersMetadata.token.Add(source, userKey);
-                        TriggerClientEvent(Players[source], "changeToken", userKey);
-                        return "OK";
+                    if (!auth.Login(username, password)) { return Exports["lenguaje"].user_wrong(); }
 
-                    }
-                    else
-                    {
-                        return Exports["lenguaje"].user_wrong();
-                    }
+                    string userKey = UserTokenGenerator.Get();
+                    player.UpdateToken(userKey, username);
+                    PlayersMetadata.token.Add(source, userKey);
+                    TriggerClientEvent(Players[source], "changeToken", userKey);
+                    return "OK";
+
                 }
                 else
                 {
-                    return  Exports["lenguaje"].user_parameters_login_error();
+                    return Exports["lenguaje"].user_parameters_login_error();
                 }
             }
             else
@@ -75,33 +70,17 @@ namespace core_ztzbx.Server
                     string password = args[1].ToString();
                     string email = args[2].ToString();
 
-                    if (password.Length > 5)
-                    {
-                        if (!auth.UsernameExists(username))
-                        {
-                            if (!auth.EmailExists(email))
-                            {
-                                string userKey = UserTokenGenerator.Get();
-                                auth.Register(userKey, username, password, "user", email);
-                                PlayersMetadata.token.Add(source, userKey);
-                                TriggerClientEvent(Players[source], "changeToken", userKey);
-                                return "OK";
-                            }
-                            else 
-                            {
-                                return Exports["lenguaje"].email_exists();
-                            }
+                    if (!EmailValidator.IsValidEmail(email)) { return Exports["lenguaje"].not_valid_email(); }
+                    if (auth.UsernameExists(username)) { return Exports["lenguaje"].user_exists(); }
+                    if (auth.EmailExists(email)) { return Exports["lenguaje"].email_exists(); }
+                    if (password.Length < 5) { return Exports["lenguaje"].password_to_short(); }
+                    
+                    string userKey = UserTokenGenerator.Get();
+                    auth.Register(userKey, username, password, "user", email);
+                    PlayersMetadata.token.Add(source, userKey);
+                    TriggerClientEvent(Players[source], "changeToken", userKey);
+                    return "OK";
 
-                        }
-                        else
-                        {
-                            return Exports["lenguaje"].user_exists();
-                        }
-                    }
-                    else
-                    {
-                        return Exports["lenguaje"].password_to_short();
-                    }
                 }
                 else
                 {
