@@ -12,7 +12,7 @@ description 'ztzbx core'
 
 dependencies {
     "fivem-mysql",
-    "lenguaje"
+    "language"
 }
 
 server_exports {"login", "register", "playerToken"}
