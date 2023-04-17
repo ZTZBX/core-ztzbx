@@ -77,13 +77,21 @@ namespace core_ztzbx.Server
 
                     if (password.Length > 5)
                     {
-                        if (!auth.Exists(username))
+                        if (!auth.UsernameExists(username))
                         {
-                            string userKey = UserTokenGenerator.Get();
-                            auth.Register(userKey, username, password, "user", email);
-                            PlayersMetadata.token.Add(source, userKey);
-                            TriggerClientEvent(Players[source], "changeToken", userKey);
-                            return "OK";
+                            if (!auth.EmailExists(email))
+                            {
+                                string userKey = UserTokenGenerator.Get();
+                                auth.Register(userKey, username, password, "user", email);
+                                PlayersMetadata.token.Add(source, userKey);
+                                TriggerClientEvent(Players[source], "changeToken", userKey);
+                                return "OK";
+                            }
+                            else 
+                            {
+                                return "The email is already exists";
+                            }
+
                         }
                         else
                         {

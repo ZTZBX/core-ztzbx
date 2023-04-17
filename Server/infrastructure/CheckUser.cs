@@ -15,11 +15,20 @@ namespace core_ztzbx.Server
           return false;
         }
 
-        public bool Exists(string username)
+        public bool UsernameExists(string username)
         {
           dynamic result = Exports["fivem-mysql"].raw($"SELECT * FROM players where username='{username}'"); 
            if (result.Count > 0){return true;}
            return false;
         }
+
+        public bool EmailExists(string email)
+        {
+          dynamic result = Exports["fivem-mysql"].raw($"SELECT * FROM players where email='{email}'"); 
+           if (result.Count > 0){return true;}
+           return false;
+        }
+
+        
     }
 }

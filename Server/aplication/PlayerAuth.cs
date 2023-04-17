@@ -20,9 +20,14 @@ namespace core_ztzbx.Server
             insertUser.New(token, username, password, group, email);
         }
 
-        public bool Exists(string username)
+        public bool UsernameExists(string username)
         {
-            return checkUser.Exists(username);
+            return checkUser.UsernameExists(username);
+        }
+
+        public bool EmailExists(string email)
+        {
+            return checkUser.EmailExists(email);
         }
     }
 }
