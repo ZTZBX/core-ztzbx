@@ -44,7 +44,7 @@ string token = Exports["core-ztzbx"].playerToken();
 **Send Message on concret User Chat**
 
 ```cs
-int source_id = 1;
+int source_id = Player.id;
 Exports["core-ztzbx"].sendOnUserChat(source_id, "Your chat message");
 ```
 
