@@ -46,7 +46,7 @@ namespace core_ztzbx.Server
                         player.UpdateToken(userKey, username);
                         PlayersMetadata.token.Add(source, userKey);
                         TriggerClientEvent(Players[source], "changeToken", userKey);
-                        return $"Welcome to <Server_name> {Players[source].Name}";
+                        return "OK";
 
                     }
                     else
