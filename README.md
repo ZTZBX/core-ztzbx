@@ -1,6 +1,7 @@
 # core_ztzbx for ZTZBX Framework
 
 ### **Requirements**
+- [lenguaje](https://github.com/ZTZBX/lenguaje)
 - [fivem-mysql](https://github.com/ZTZBX/fivem-mysql)
 
 To build it, run `build.cmd`. To run it, run the following commands to make a symbolic link in your server data directory:

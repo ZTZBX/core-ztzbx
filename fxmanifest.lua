@@ -11,7 +11,9 @@ version '1.0.0'
 description 'ztzbx core'
 
 dependencies {
-    "fivem-mysql"
+    "fivem-mysql",
+    "lenguaje"
 }
 
-
+server_exports {"login", "register", "playerToken"}
+client_exports {"playerToken", "sendOnUserChat", "sendOnUserChat"}

@@ -51,17 +51,17 @@ namespace core_ztzbx.Server
                     }
                     else
                     {
-                        return "The username or password is wrong";
+                        return Exports["lenguaje"].user_wrong();
                     }
                 }
                 else
                 {
-                    return "You need to pass username and password";
+                    return  Exports["lenguaje"].user_parameters_login_error();
                 }
             }
             else
             {
-                return "You cant login if you are already logged";
+                return Exports["lenguaje"].already_logged();
             }
         }
 
@@ -89,29 +89,29 @@ namespace core_ztzbx.Server
                             }
                             else 
                             {
-                                return "The email is already exists";
+                                return Exports["lenguaje"].email_exists();
                             }
 
                         }
                         else
                         {
-                            return "The username is already exists";
+                            return Exports["lenguaje"].user_exists();
                         }
                     }
                     else
                     {
-                        return "The password is to short";
+                        return Exports["lenguaje"].password_to_short();
                     }
                 }
                 else
                 {
-                    return "You need to pass username, password and email";
+                    return Exports["lenguaje"].user_parameters_register_error();
                 }
 
             }
             else
             {
-                return "You register cant if you are logged";
+                return Exports["lenguaje"].already_logged_registered();
             }
         }
 
