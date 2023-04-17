@@ -86,12 +86,14 @@ int source_id = Player.id;
 
 string username = "user";
 string password = "pas1234";
+string email = "test@mail.com";
 
 List<string> user_pass = new List<string> {};
 
-// first the username and after the password
+// add the credentials in the exact order
 user_pass.Add(username);
 user_pass.Add(password);
+user_pass.Add(email);
 
 string result = Exports["core-ztzbx"].register(source_id, user_pass);
 
