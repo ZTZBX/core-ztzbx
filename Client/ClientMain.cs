@@ -27,7 +27,5 @@ namespace core_ztzbx.Client
             Player.playerToken = token;
             FreezeEntityPosition(PlayerPedId(), false);
         }
-
-        public string GetToken() {return Player.playerToken;}
     }
 }

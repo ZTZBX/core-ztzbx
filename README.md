@@ -64,7 +64,17 @@ List<string> user_pass = new List<string> {};
 user_pass.Add(username);
 user_pass.Add(password);
 
-Exports["core-ztzbx"].login(source_id, user_pass);
+string result = Exports["core-ztzbx"].login(source_id, user_pass);
+
+if (result == "OK")
+{
+    // your process
+}
+else 
+{
+    Debug.WriteLine(result);
+}
+
 ```
 
 **Register**
@@ -83,7 +93,16 @@ List<string> user_pass = new List<string> {};
 user_pass.Add(username);
 user_pass.Add(password);
 
-Exports["core-ztzbx"].register(source_id, user_pass);
+string result = Exports["core-ztzbx"].register(source_id, user_pass);
+
+if (result == "OK")
+{
+    // your process
+}
+else 
+{
+    Debug.WriteLine(result);
+}
 ```
 
 **Get The Player Token**

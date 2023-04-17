@@ -13,8 +13,8 @@ namespace core_ztzbx.Server
 
         public ServerMain()
         {
-            Exports.Add("login", new Action<int, IEnumerable<string>>(Login));
-            Exports.Add("register", new Action<int, IEnumerable<string>>(Login));
+            Exports.Add("login", new Func<int, IEnumerable<string>, string>(Login));
+            Exports.Add("register", new Func<int, IEnumerable<string>, string>(Register));
             Exports.Add("playerToken", new Func<int, string>(PlayerToken));
         }
 
@@ -31,7 +31,7 @@ namespace core_ztzbx.Server
             }
         }
 
-        public void Login(int source, dynamic args)
+        public string Login(int source, dynamic args)
         {
             if (!PlayersMetadata.token.ContainsKey(source))
             {
@@ -46,25 +46,26 @@ namespace core_ztzbx.Server
                         player.UpdateToken(userKey, username);
                         PlayersMetadata.token.Add(source, userKey);
                         TriggerClientEvent(Players[source], "changeToken", userKey);
-                        TriggerClientEvent(Players[source], "sendOnUserChat", $"Welcome to <Server_name> {Players[source].Name}");
+                        return $"Welcome to <Server_name> {Players[source].Name}";
+
                     }
                     else
                     {
-                        TriggerClientEvent(Players[source], "sendOnUserChat", "The username or password is wrong");
+                        return "The username or password is wrong";
                     }
                 }
                 else
                 {
-                    TriggerClientEvent(Players[source], "sendOnUserChat", "/login <username> <password>");
+                    return "You need to pass username and password";
                 }
             }
             else
             {
-                TriggerClientEvent(Players[source], "sendOnUserChat", "You cant login if you are already logged");
+                return "You cant login if you are already logged";
             }
         }
 
-        public void Register(int source, dynamic args)
+        public string Register(int source, dynamic args)
         {
             if (!PlayersMetadata.token.ContainsKey(source))
             {
@@ -81,35 +82,62 @@ namespace core_ztzbx.Server
                             auth.Register(userKey, username, password, "user");
                             PlayersMetadata.token.Add(source, userKey);
                             TriggerClientEvent(Players[source], "changeToken", userKey);
+                            return "OK";
                         }
                         else
                         {
-                            TriggerClientEvent(Players[source], "sendOnUserChat", "The username is already exists");
+                            return "The username is already exists";
                         }
                     }
                     else
                     {
-                        TriggerClientEvent(Players[source], "sendOnUserChat", "The password is to short");
+                        return "The password is to short";
                     }
                 }
                 else
                 {
-                    TriggerClientEvent(Players[source], "sendOnUserChat", "/login <username> <password>");
+                    return "You need to pass username and password";
                 }
 
             }
             else
             {
-                TriggerClientEvent(Players[source], "sendOnUserChat", "You register cant if you are logged");
+                return "You register cant if you are logged";
             }
         }
 
 
         [Command("login")]
-        public void LoginCommand(int source, List<object> args, string raw) { Login(source, args); }
+        public void LoginCommand(int source, List<object> args, string raw)
+        {
+            string loginMeta = Login(source, args);
+
+            if ("OK" == loginMeta)
+            {
+                TriggerClientEvent(Players[source], "sendOnUserChat", $"Welcome to <Server_name> {Players[source].Name}");
+            }
+            else
+            {
+                TriggerClientEvent(Players[source], "sendOnUserChat", loginMeta);
+            }
+        }
 
 
         [Command("register")]
-        public void RegisterCommand(int source, List<object> args, string raw) { Register(source, args); }
+        public void RegisterCommand(int source, List<object> args, string raw)
+        {
+
+            string RegisterMeta = Register(source, args);
+
+            if ("OK" == RegisterMeta)
+            {
+                TriggerClientEvent(Players[source], "sendOnUserChat", $"Welcome to <Server_name> {Players[source].Name}");
+            }
+            else
+            {
+                TriggerClientEvent(Players[source], "sendOnUserChat", RegisterMeta);
+            }
+
+        }
     }
 }
