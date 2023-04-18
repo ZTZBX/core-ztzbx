@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace core_ztzbx.Server
 {
-    public class Player
+    public class PlayerActions
     {
-        public Player(){}
+        public PlayerActions(){}
 
         UpdateUser upUser = new UpdateUser();
         public void UpdateToken(string token, string username)
