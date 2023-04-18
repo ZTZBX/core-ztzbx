@@ -24,6 +24,12 @@ dependencies {
 }
 ```
 
+### **How the Auth works**
+
+*This is not the best way to do it, but is pretty safe, if you got some ideas to make it more safe, just get in touch with me.*
+
+![](https://github.com/ZTZBX/core-ztzbx/blob/main/auth_diagram.png)
+
 ### **Client Side**
 
 **Send Message on concret User Chat**
@@ -50,6 +56,7 @@ Exports["core-ztzbx"].sendOnUserChat(source_id, "Your chat message");
 ```
 
 **Login**
+
 This will be use to login a user in the server
 
 ```cs
