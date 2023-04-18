@@ -31,7 +31,7 @@ namespace core_ztzbx.Server
 
         public bool IsAdmin(string token)
         {
-            dynamic result = Exports["fivem-mysql"].raw($"SELECT group FROM players where token='{token}'");
+            dynamic result = Exports["fivem-mysql"].raw($"SELECT `group` FROM players where token='{token}'");
             if (result.Count <= 0) { return false; }
             if (result[0][0] == "admin") { return true; }
             return false;
