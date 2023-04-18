@@ -15,5 +15,5 @@ dependencies {
     "language"
 }
 
-server_exports {"login", "register", "playerToken"}
+server_exports {"login", "register", "playerToken", "playerAdmin"}
 client_exports {"playerToken", "sendOnUserChat", "sendOnUserChat"}

@@ -29,5 +29,10 @@ namespace core_ztzbx.Server
         {
             return checkUser.EmailExists(email);
         }
+
+        public bool IsAdmin(string token)
+        {
+            return checkUser.IsAdmin(token);
+        }
     }
 }

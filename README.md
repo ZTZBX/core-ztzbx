@@ -78,7 +78,8 @@ else
 
 ```
 
-**Register**
+**Register player**
+
 This will be use to register a user in the server
 
 ```cs
@@ -108,7 +109,7 @@ else
 }
 ```
 
-**Get The Player Token**
+**Get the Player token**
 
 ```cs
 // this is the player id
@@ -116,4 +117,24 @@ int source_id = Player.id;
 
 // if token return "" thats mean the user isn't logged.
 string token = Exports["core-ztzbx"].playerToken(source_id);
+```
+
+**Check if the user is admin**
+```cs
+// the idea is to do this with a event in the server side ho need the client token
+// and another event in the client si ho got triggered from here to indicate if the user got pers to do an concret action.
+
+// in this example i dont use the event i just call the exported event from the server side, but this is not the way to do it, is just an example.
+string token = Exports["core-ztzbx"].playerToken(source_id);
+
+bool isAdmin = Exports["core-ztzbx"].playerAdmin(token);
+
+if (isAdmin())
+{
+    // trigger your event
+}
+else
+{
+    // trigger your event
+}
 ```

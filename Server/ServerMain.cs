@@ -16,6 +16,12 @@ namespace core_ztzbx.Server
             Exports.Add("login", new Func<int, IEnumerable<string>, string>(Login));
             Exports.Add("register", new Func<int, IEnumerable<string>, string>(Register));
             Exports.Add("playerToken", new Func<int, string>(PlayerToken));
+            Exports.Add("playerAdmin", new Func<string, bool>(PlayerAdmin));
+        }
+
+        public bool PlayerAdmin(string userToken)
+        {
+            return auth.IsAdmin(userToken);
         }
 
         public string PlayerToken(int source)
@@ -74,7 +80,7 @@ namespace core_ztzbx.Server
                     if (auth.UsernameExists(username)) { return Exports["language"].user_exists(); }
                     if (auth.EmailExists(email)) { return Exports["language"].email_exists(); }
                     if (password.Length < 5) { return Exports["language"].password_to_short(); }
-                    
+
                     string userKey = UserTokenGenerator.Get();
                     auth.Register(userKey, username, password, "user", email);
                     PlayersMetadata.token.Add(source, userKey);
