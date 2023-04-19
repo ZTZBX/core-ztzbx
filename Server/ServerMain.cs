@@ -17,8 +17,23 @@ namespace core_ztzbx.Server
             Exports.Add("register", new Func<int, IEnumerable<string>, string>(Register));
             Exports.Add("playerToken", new Func<int, string>(PlayerToken));
             Exports.Add("playerAdmin", new Func<string, bool>(PlayerAdmin));
+            Exports.Add("getPlayersUsernames", new Func<IEnumerable<string>>(GetPlayersUsernames));
             EventHandlers["playerDropped"] += new Action<Player, string>(OnPlayerDropped);
 
+        }
+
+        private IEnumerable<string> GetPlayersUsernames()
+        {
+            
+            List<string> usernames = new List<string>();
+
+            foreach(Player user in PlayersMetadata.onlinePlayers)
+            {
+                usernames.Add(PlayersMetadata.playerUsername[user]);
+            }
+
+            IEnumerable<string> result = usernames;
+            return result;
         }
 
 
