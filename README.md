@@ -67,7 +67,7 @@ Exports["core-ztzbx"].sendOnUserChat(source_id, "Your chat message");
 
 **Login**
 
-This will be use to login a user in the server
+This will be use to login a user in the server, return a string.
 
 ```cs
 // this is the player id
@@ -97,7 +97,7 @@ else
 
 **Register player**
 
-This will be use to register a user in the server
+This will be use to register a user in the server, return a string.
 
 ```cs
 // this is the player id
@@ -137,6 +137,8 @@ string token = Exports["core-ztzbx"].playerToken(source_id);
 ```
 
 **Check if the user is admin**
+
+This will return a bool
 ```cs
 // the idea is to do this with a event in the server side ho need the client token
 // and another event in the client si ho got triggered from here to indicate if the user got pers to do an concret action.
@@ -157,6 +159,8 @@ else
 ```
 
 **Get all players usernames**
+
+This will return a IEnumerable
 ```cs
 // pretty easy
 dynamic playersUsernames = Exports["core-ztzbx"].getPlayersUsernames();
