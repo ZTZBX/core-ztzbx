@@ -157,16 +157,6 @@ else
 ```
 
 **Get all players usernames**
-
-```cs
-// this is the player id
-int source_id = Player.id;
-
-// if token return "" thats mean the user isn't logged.
-string token = Exports["core-ztzbx"].playerToken(source_id);
-```
-
-**Check if the user is admin**
 ```cs
 // pretty easy
 dynamic playersUsernames = Exports["core-ztzbx"].getPlayersUsernames();
