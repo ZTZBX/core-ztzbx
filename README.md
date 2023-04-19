@@ -28,7 +28,17 @@ dependencies {
 
 *This is not the best way to do it, but is pretty safe, if you got some ideas to make it more safe, just get in touch with me.*
 
-![](https://github.com/ZTZBX/core-ztzbx/blob/main/auth_diagram.png)
+
+```mermaid
+graph TD;
+    Client-->SendLoginPetitionToServer-->Server-->AuthProcess-->Authorized;
+    AuthProcess-->NotAuthorized-->ReturnErrorToClient;
+    Authorized-->CreatingSession
+    Authorized-->AddingPlayerOnlineList
+    Authorized-->GeneratingToken
+    Authorized-->GeneratingPlayerUtils
+    GeneratingToken-->ReturnTokenToClient
+```
 
 ### **Client Side**
 
