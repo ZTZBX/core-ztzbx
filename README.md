@@ -31,7 +31,7 @@ dependencies {
 
 ```mermaid
 graph TD;
-    Client-->Login-->Server-->AuthProcess-->Authorized;
+    Client-->SendLoginPetitionToServer-->Server-->AuthProcess-->Authorized;
     AuthProcess-->NotAuthorized-->ReturnErrorToClient;
     Authorized-->CreatingSession
     Authorized-->AddingPlayerOnlineList
