@@ -52,6 +52,7 @@ Exports["core-ztzbx"].sendOnUserChat("Your chat message");
 
 This will be fundamental to make interactions with the database
 
+
 ```cs
 string token = Exports["core-ztzbx"].playerToken();
 ```
@@ -166,10 +167,19 @@ else
 }
 ```
 
-**Get all players usernames**
+**Get all Players usernames**
 
 This will return a IEnumerable
 ```cs
 // pretty easy
 dynamic playersUsernames = Exports["core-ztzbx"].getPlayersUsernames();
 ```
+
+**Get all Player Handle from username**
+
+```cs
+
+string playerUsername = "pepe";
+string playerHandle = Exports["core-ztzbx"].getPlayerHandleFromUsername(playerUsername);
+```
+

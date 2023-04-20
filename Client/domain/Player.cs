@@ -8,5 +8,6 @@ namespace core_ztzbx.Client
     static public class Player
     {
         static public string playerToken;
+        static public string username;
     }
 }

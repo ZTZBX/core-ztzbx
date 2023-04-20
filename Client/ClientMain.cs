@@ -12,11 +12,12 @@ namespace core_ztzbx.Client
         public ClientMain()
         {
             EventHandlers["changeToken"] += new Action<string>(ChangeToken);
-            EventHandlers["getToken"] += new Func<string>(GetToken);
+            EventHandlers["changeUsername"] += new Action<string>(changeUsername);
 
 
             // Exports
             Exports.Add("playerToken", new Func<string>(GetToken));
+            Exports.Add("playerUsername", new Func<string>(GetUsername));
             Exports.Add("banPlayer", new Action<string>(BanPlayer));
 
             FreezeEntityPosition(PlayerPedId(), true);
@@ -26,9 +27,12 @@ namespace core_ztzbx.Client
         {
             TriggerServerEvent("banPlayer", username);
         }
-
         private string GetToken() { return Player.playerToken; }
-
+        private string GetUsername() { return Player.username; }
+        private void changeUsername(string username)
+        {
+            Player.username = username;
+        }
         private void ChangeToken(string token)
         {
             Player.playerToken = token;

@@ -21,9 +21,15 @@ namespace core_ztzbx.Server
             Exports.Add("playerToken", new Func<int, string>(PlayerToken));
             Exports.Add("playerAdmin", new Func<string, bool>(PlayerAdmin));
             Exports.Add("getPlayersUsernames", new Func<IEnumerable<string>>(GetPlayersUsernames));
+            Exports.Add("getPlayerHandleFromUsername", new Func<string, string>(getPlayerHandleFromUsername));
             EventHandlers["banPlayer"] += new Action<Player, string>(BanPlayer);
             EventHandlers["playerDropped"] += new Action<Player, string>(OnPlayerDropped);
 
+        }
+
+        private string getPlayerHandleFromUsername(string username)
+        {
+            return PlayersMetadata.playerUsername.FirstOrDefault(x => x.Value == username).Key.Handle;
         }
 
         private void BanPlayer([FromSource] Player player, string username)
@@ -108,6 +114,8 @@ namespace core_ztzbx.Server
                 }
 
                 TriggerClientEvent(Players[source], "changeToken", userKey);
+                TriggerClientEvent(Players[source], "changeUsername", username);
+                
                 PlayersMetadata.playerUsername.Add(Players[source], username);
                 PlayersMetadata.onlinePlayers.Add(Players[source]);
                 return "OK";
@@ -130,7 +138,7 @@ namespace core_ztzbx.Server
                 string email = args[2].ToString();
 
                 if (!EmailValidator.IsValidEmail(email)) { return Exports["language"].not_valid_email(); }
-                if (username.Length > 20){ return Exports["language"].user_to_large(); }
+                if (username.Length > 20) { return Exports["language"].user_to_large(); }
                 if (auth.UsernameExists(username)) { return Exports["language"].user_exists(); }
                 if (auth.EmailExists(email)) { return Exports["language"].email_exists(); }
                 if (password.Length < 5) { return Exports["language"].password_to_short(); }
@@ -153,6 +161,7 @@ namespace core_ztzbx.Server
                 PlayersMetadata.playerUsername.Add(Players[source], username);
                 PlayersMetadata.onlinePlayers.Add(Players[source]);
                 TriggerClientEvent(Players[source], "changeToken", userKey);
+                TriggerClientEvent(Players[source], "changeUsername", username);
                 return "OK";
 
             }
