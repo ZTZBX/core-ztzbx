@@ -56,6 +56,14 @@ This will be fundamental to make interactions with the database
 string token = Exports["core-ztzbx"].playerToken();
 ```
 
+**Ban Player**
+
+To ban a player you need to be in the `admin` group
+```cs
+string playerUsername = "pepe";
+string token = Exports["core-ztzbx"].banPlayer("playerUsername");
+```
+
 ### **Server Side**
 
 **Send Message on concret User Chat**

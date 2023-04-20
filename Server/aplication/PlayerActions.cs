@@ -12,5 +12,10 @@ namespace core_ztzbx.Server
         {
             upUser.Token(token, username);
         }
+
+         public void BanPlayer(string token)
+        {
+            upUser.BanPlayer(token);
+        }
     }
 }

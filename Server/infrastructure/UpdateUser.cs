@@ -11,5 +11,12 @@ namespace core_ztzbx.Server
         {
           Exports["fivem-mysql"].raw($"UPDATE players SET token = '{token}' WHERE username='{username}'");
         }
+
+
+        public void BanPlayer(string token)
+        {
+          Exports["fivem-mysql"].raw($"UPDATE players SET baned = {1} WHERE token='{token}'");
+        }
+
     }
 }

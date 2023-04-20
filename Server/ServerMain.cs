@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using CitizenFX.Core;
@@ -18,16 +19,26 @@ namespace core_ztzbx.Server
             Exports.Add("playerToken", new Func<int, string>(PlayerToken));
             Exports.Add("playerAdmin", new Func<string, bool>(PlayerAdmin));
             Exports.Add("getPlayersUsernames", new Func<IEnumerable<string>>(GetPlayersUsernames));
+            EventHandlers["banPlayer"] += new Action<Player, string>(BanPlayer);
             EventHandlers["playerDropped"] += new Action<Player, string>(OnPlayerDropped);
 
         }
 
+        private void BanPlayer([FromSource] Player player, string username)
+        {
+            if (auth.IsAdmin(PlayersMetadata.token[player]))
+            {
+                Player bannedPlayer = PlayersMetadata.playerUsername.FirstOrDefault(x => x.Value == username).Key;
+                if (player != bannedPlayer){playerAction.BanPlayer(PlayersMetadata.token[bannedPlayer]);}
+            }
+        }
+
         private IEnumerable<string> GetPlayersUsernames()
         {
-            
+
             List<string> usernames = new List<string>();
 
-            foreach(Player user in PlayersMetadata.onlinePlayers)
+            foreach (Player user in PlayersMetadata.onlinePlayers)
             {
                 usernames.Add(PlayersMetadata.playerUsername[user]);
             }

@@ -8,6 +8,7 @@ CREATE TABLE players (
     `password` varchar(255) NOT NULL,
     token varchar(255) NULL,
     `group` varchar(100) NOT NULL, 
+    baned tinyint NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE(email),
