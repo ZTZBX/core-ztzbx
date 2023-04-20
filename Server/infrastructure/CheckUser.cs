@@ -6,12 +6,16 @@ namespace core_ztzbx.Server
 {
     public class CheckUser : BaseScript
     {
+
+        YamlConfig secretPlayer = new YamlConfig("Config.Yaml");
+
         public CheckUser() { }
         public bool CheckCredentials(string username, string password)
         {
-            dynamic result = Exports["fivem-mysql"].raw($"SELECT username FROM players where username='{username}' and password='{password}'");
-
-            if (result.Count > 0) { return true; }
+            dynamic passwordEncrypted = Exports["fivem-mysql"].raw($"SELECT password FROM players where username='{username}'");
+            if (passwordEncrypted.Count == 0) { return false; }
+            string decrypedpassword = StringCipher.Decrypt(passwordEncrypted[0][0], secretPlayer.data.secret);
+            if (decrypedpassword == password) { return true; }
             return false;
         }
 

@@ -88,9 +88,9 @@ namespace core_ztzbx.Server
                 string username = args[0].ToString();
                 string password = args[1].ToString();
 
-                string encryptedpassword = StringCipher.Encrypt(password, secretPlayer.data.secret);
+                string encryptedpassword = StringCipher.Decrypt(, secretPlayer.data.secret);
 
-                if (!auth.Login(username, encryptedpassword)) { return Exports["language"].user_wrong(); }
+                if (!auth.Login(username, password)) { return Exports["language"].user_wrong(); }
 
                 if (auth.IsBanned(username)) { return Exports["language"].banned_message(); }
 
