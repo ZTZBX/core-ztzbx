@@ -174,7 +174,7 @@ This will return a IEnumerable
 dynamic playersUsernames = Exports["core-ztzbx"].getPlayersUsernames();
 ```
 
-**Get all Player Handle from username**
+**Get Player Handle from username**
 
 ```cs
 string playerUsername = "pepe";
@@ -182,7 +182,7 @@ string playerHandle = Exports["core-ztzbx"].getPlayerHandleFromUsername(playerUs
 ```
 
 
-**Get all Player NetworkID from username**
+**Get Player NetworkID from username**
 
 ```cs
 string playerUsername = "pepe";
