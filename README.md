@@ -181,3 +181,10 @@ string playerUsername = "pepe";
 string playerHandle = Exports["core-ztzbx"].getPlayerHandleFromUsername(playerUsername);
 ```
 
+
+**Get all Player NetworkID from username**
+
+```cs
+string playerUsername = "pepe";
+string playerHandle = Exports["core-ztzbx"].getPlayerNetworkIdFromUsername(playerUsername);
+```
