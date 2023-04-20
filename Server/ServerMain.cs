@@ -84,6 +84,8 @@ namespace core_ztzbx.Server
 
                 if (!auth.Login(username, password)) { return Exports["language"].user_wrong(); }
 
+                if (auth.IsBanned(username)) { return "You can't access the server, you are banned"; }
+
                 if (PlayersMetadata.onlinePlayers.Contains(Players[source])) { return Exports["language"].already_logged(); }
 
                 string userKey = UserTokenGenerator.Get();

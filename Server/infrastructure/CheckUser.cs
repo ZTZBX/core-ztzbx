@@ -36,6 +36,12 @@ namespace core_ztzbx.Server
             if (result[0][0] == "admin") { return true; }
             return false;
         }
+        public bool IsBanned(string username)
+        {
+            dynamic result = Exports["fivem-mysql"].raw($"SELECT banned FROM players where username='{username}'");
+            if (result[0][0] == "1") { return true; }
+            return false;
+        }
 
 
     }

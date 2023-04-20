@@ -34,5 +34,10 @@ namespace core_ztzbx.Server
         {
             return checkUser.IsAdmin(token);
         }
+
+        public bool IsBanned(string username)
+        {
+            return checkUser.IsBanned(username);
+        }
     }
 }
