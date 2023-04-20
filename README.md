@@ -178,7 +178,6 @@ dynamic playersUsernames = Exports["core-ztzbx"].getPlayersUsernames();
 **Get all Player Handle from username**
 
 ```cs
-
 string playerUsername = "pepe";
 string playerHandle = Exports["core-ztzbx"].getPlayerHandleFromUsername(playerUsername);
 ```

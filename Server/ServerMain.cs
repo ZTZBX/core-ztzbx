@@ -22,9 +22,15 @@ namespace core_ztzbx.Server
             Exports.Add("playerAdmin", new Func<string, bool>(PlayerAdmin));
             Exports.Add("getPlayersUsernames", new Func<IEnumerable<string>>(GetPlayersUsernames));
             Exports.Add("getPlayerHandleFromUsername", new Func<string, string>(getPlayerHandleFromUsername));
+            Exports.Add("getPlayerNetworkIdFromUsername", new Func<string, int>(GetPlayerNetworkIdFromUsername)); 
             EventHandlers["banPlayer"] += new Action<Player, string>(BanPlayer);
             EventHandlers["playerDropped"] += new Action<Player, string>(OnPlayerDropped);
 
+        }
+
+        private int GetPlayerNetworkIdFromUsername(string username)
+        {
+            return PlayersMetadata.playerUsername.FirstOrDefault(x => x.Value == username).Key.Character.NetworkId;
         }
 
         private string getPlayerHandleFromUsername(string username)
