@@ -1,0 +1,8 @@
+
+
+# 
+#  The Framework use PBKDF1 algorithm to encrypt the te users information you need to pass a secret to encrypt the data.
+#  Important! dont share the secret you put!! 
+#
+
+secret: "Your secret key"

@@ -12,6 +12,8 @@ namespace core_ztzbx.Server
         PlayerAuth auth = new PlayerAuth();
         PlayerActions playerAction = new PlayerActions();
 
+        YamlConfig secretPlayer = new YamlConfig("Config.Yaml");
+
         public ServerMain()
         {
             Exports.Add("login", new Func<int, IEnumerable<string>, string>(Login));
@@ -86,7 +88,9 @@ namespace core_ztzbx.Server
                 string username = args[0].ToString();
                 string password = args[1].ToString();
 
-                if (!auth.Login(username, password)) { return Exports["language"].user_wrong(); }
+                string encryptedpassword = StringCipher.Encrypt(password, secretPlayer.data.secret);
+
+                if (!auth.Login(username, encryptedpassword)) { return Exports["language"].user_wrong(); }
 
                 if (auth.IsBanned(username)) { return Exports["language"].banned_message(); }
 
@@ -128,12 +132,15 @@ namespace core_ztzbx.Server
                 string email = args[2].ToString();
 
                 if (!EmailValidator.IsValidEmail(email)) { return Exports["language"].not_valid_email(); }
+                if (username.Length > 20){ return Exports["language"].user_to_large(); }
                 if (auth.UsernameExists(username)) { return Exports["language"].user_exists(); }
                 if (auth.EmailExists(email)) { return Exports["language"].email_exists(); }
                 if (password.Length < 5) { return Exports["language"].password_to_short(); }
 
+                string encryptedpassword = StringCipher.Encrypt(password, secretPlayer.data.secret);
+
                 string userKey = UserTokenGenerator.Get();
-                auth.Register(userKey, username, password, "user", email);
+                auth.Register(userKey, username, encryptedpassword, "user", email);
 
                 if (PlayersMetadata.token.ContainsKey(Players[source]))
                 {
