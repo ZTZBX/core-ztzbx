@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using CitizenFX.Core;
-
+using static CitizenFX.Core.Native.API;
 
 namespace core_ztzbx.Server
 {
@@ -29,7 +29,11 @@ namespace core_ztzbx.Server
             if (auth.IsAdmin(PlayersMetadata.token[player]))
             {
                 Player bannedPlayer = PlayersMetadata.playerUsername.FirstOrDefault(x => x.Value == username).Key;
-                if (player != bannedPlayer){playerAction.BanPlayer(PlayersMetadata.token[bannedPlayer]);}
+                if (player != bannedPlayer)
+                {
+                    playerAction.BanPlayer(PlayersMetadata.token[bannedPlayer]);
+                    DropPlayer(bannedPlayer.Handle, $"Admin <{PlayersMetadata.playerUsername[player]}> just banned you!");
+                }
             }
         }
 
