@@ -188,3 +188,10 @@ string playerHandle = Exports["core-ztzbx"].getPlayerHandleFromUsername(playerUs
 string playerUsername = "pepe";
 string playerHandle = Exports["core-ztzbx"].getPlayerNetworkIdFromUsername(playerUsername);
 ```
+
+**Freeze Switch for Player with username**
+
+```cs
+string playerUsername = "pepe";
+string playerHandle = Exports["core-ztzbx"].freezePlayerSwitch(playerUsername);
+```

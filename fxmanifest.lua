@@ -22,7 +22,8 @@ server_exports {
     "playerAdmin",
     "getPlayersUsernames",
     "getPlayerHandleFromUsername",
-    "getPlayerNetworkIdFromUsername"
+    "getPlayerNetworkIdFromUsername",
+    "freezePlayerSwitch"
 }
 
 client_exports {

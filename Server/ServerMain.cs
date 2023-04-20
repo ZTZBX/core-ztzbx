@@ -23,9 +23,26 @@ namespace core_ztzbx.Server
             Exports.Add("getPlayersUsernames", new Func<IEnumerable<string>>(GetPlayersUsernames));
             Exports.Add("getPlayerHandleFromUsername", new Func<string, string>(getPlayerHandleFromUsername));
             Exports.Add("getPlayerNetworkIdFromUsername", new Func<string, int>(GetPlayerNetworkIdFromUsername)); 
+            Exports.Add("freezePlayerSwitch", new Action<string>(freezePlayerSwitch)); 
             EventHandlers["banPlayer"] += new Action<Player, string>(BanPlayer);
             EventHandlers["playerDropped"] += new Action<Player, string>(OnPlayerDropped);
 
+        }
+
+        private void freezePlayerSwitch(string username)
+        {
+            Player currentPlayer = PlayersMetadata.playerUsername.FirstOrDefault(x => x.Value == username).Key;
+            if (PlayersMetadata.playerFroze[currentPlayer])
+            {
+                FreezeEntityPosition(NetworkGetEntityFromNetworkId(currentPlayer.Character.NetworkId), false);
+                PlayersMetadata.playerFroze.Remove(currentPlayer);
+                PlayersMetadata.playerFroze.Add(currentPlayer, false);
+            } 
+            else{
+                FreezeEntityPosition(NetworkGetEntityFromNetworkId(currentPlayer.Character.NetworkId), true);
+                PlayersMetadata.playerFroze.Remove(currentPlayer);
+                PlayersMetadata.playerFroze.Add(currentPlayer, true);
+            }
         }
 
         private int GetPlayerNetworkIdFromUsername(string username)
@@ -71,6 +88,7 @@ namespace core_ztzbx.Server
             Debug.WriteLine($"Player {PlayersMetadata.playerUsername[player]} dropped (Reason: {reason}).");
             PlayersMetadata.onlinePlayers.Remove(player);
             PlayersMetadata.playerUsername.Remove(player);
+            PlayersMetadata.playerFroze.Remove(player);
 
         }
 
@@ -124,6 +142,7 @@ namespace core_ztzbx.Server
                 
                 PlayersMetadata.playerUsername.Add(Players[source], username);
                 PlayersMetadata.onlinePlayers.Add(Players[source]);
+                PlayersMetadata.playerFroze.Add(Players[source], false);
                 return "OK";
 
             }
@@ -166,6 +185,7 @@ namespace core_ztzbx.Server
 
                 PlayersMetadata.playerUsername.Add(Players[source], username);
                 PlayersMetadata.onlinePlayers.Add(Players[source]);
+                PlayersMetadata.playerFroze.Add(Players[source], false);
                 TriggerClientEvent(Players[source], "changeToken", userKey);
                 TriggerClientEvent(Players[source], "changeUsername", username);
                 return "OK";
