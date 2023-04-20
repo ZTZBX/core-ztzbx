@@ -61,7 +61,6 @@ string token = Exports["core-ztzbx"].playerToken();
 
 To ban a player you need to be in the `admin` group
 ```cs
-string playerUsername = "pepe";
 string token = Exports["core-ztzbx"].banPlayer("playerUsername");
 ```
 
