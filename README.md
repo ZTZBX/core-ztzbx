@@ -8,10 +8,10 @@ To build it, run `build.cmd`. To run it, run the following commands to make a sy
 
 ```dos
 cd /d [PATH TO THIS RESOURCE]
-mklink /d X:\cfx-server-data\resources\[local]\core_ztzbx dist
+mklink /d X:\cfx-server-data\resources\[local]\core-ztzbx dist
 ```
 
-Afterwards, you can use `ensure core_ztzbx` in your server.cfg or server console to start the resource.
+Afterwards, you can use `ensure core-ztzbx` in your server.cfg or server console to start the resource.
 
 ### **Guide**
 ---

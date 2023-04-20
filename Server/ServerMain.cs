@@ -52,9 +52,9 @@ namespace core_ztzbx.Server
 
         public string PlayerToken(int source)
         {
-            if (PlayersMetadata.token.ContainsKey(source))
+            if (PlayersMetadata.token.ContainsKey(Players[source]))
             {
-                return PlayersMetadata.token[source];
+                return PlayersMetadata.token[Players[source]];
             }
             else
             {
@@ -78,13 +78,14 @@ namespace core_ztzbx.Server
                 string userKey = UserTokenGenerator.Get();
                 playerAction.UpdateToken(userKey, username);
 
-                if (PlayersMetadata.token.ContainsKey(source))
+                if (PlayersMetadata.token.ContainsKey(Players[source]))
                 {
-                    PlayersMetadata.token[source] = userKey;
+                    PlayersMetadata.token.Remove(Players[source]);
+                    PlayersMetadata.token.Add(Players[source], userKey);
                 }
                 else
                 {
-                    PlayersMetadata.token.Add(source, userKey);
+                    PlayersMetadata.token.Add(Players[source], userKey);
                 }
 
                 TriggerClientEvent(Players[source], "changeToken", userKey);
@@ -116,15 +117,18 @@ namespace core_ztzbx.Server
 
                 string userKey = UserTokenGenerator.Get();
                 auth.Register(userKey, username, password, "user", email);
-                if (PlayersMetadata.token.ContainsKey(source))
+
+                if (PlayersMetadata.token.ContainsKey(Players[source]))
                 {
-                    PlayersMetadata.token[source] = userKey;
+                    PlayersMetadata.token.Remove(Players[source]);
+                    PlayersMetadata.token.Add(Players[source], userKey);
                 }
                 else
                 {
-                    PlayersMetadata.token.Add(source, userKey);
+                    PlayersMetadata.token.Add(Players[source], userKey);
                 }
 
+                PlayersMetadata.playerUsername.Add(Players[source], username);
                 PlayersMetadata.onlinePlayers.Add(Players[source]);
                 TriggerClientEvent(Players[source], "changeToken", userKey);
                 return "OK";
