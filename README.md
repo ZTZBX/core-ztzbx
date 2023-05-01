@@ -64,6 +64,14 @@ To ban a player you need to be in the `admin` group
 string token = Exports["core-ztzbx"].banPlayer("playerUsername");
 ```
 
+
+**Get Player Username**
+
+To ban a player you need to be in the `admin` group
+```cs
+string username = Exports["core-ztzbx"].playerUsername();
+```
+
 ### **Server Side**
 
 **Send Message on concret User Chat**
